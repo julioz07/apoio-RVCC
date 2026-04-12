@@ -29,7 +29,7 @@ export default function Verificador() {
           <span aria-hidden="true">🔍 </span>Verificador de Texto
         </h1>
         <p className={`text-xl ${highContrast ? 'text-white' : 'text-slate-500'}`}>
-          Cole o seu texto abaixo e receba sugestões de melhoria — o texto nunca é alterado automaticamente.
+          Cole o seu texto abaixo e recebe sugestões de melhoria — o texto nunca é alterado automaticamente.
         </p>
       </header>
 
@@ -40,7 +40,7 @@ export default function Verificador() {
         <span className="text-2xl flex-shrink-0" aria-hidden="true">ℹ️</span>
         <p className={`text-sm ${highContrast ? 'text-white' : 'text-blue-800'}`}>
           Este verificador <strong>não corrige nada automaticamente</strong> — apenas aponta problemas e dá sugestões.
-          Também não guarda nem envia o seu texto para qualquer servidor.
+          Também não guarda nem envia o seu texto para nenhum servidor.
         </p>
       </div>
 

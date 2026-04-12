@@ -116,7 +116,7 @@ export default function Portfolio() {
   }
 
   function handleRestart() {
-    if (window.confirm('Tem a certeza? O progresso atual será apagado.')) {
+    if (window.confirm('Tem a certeza? O progresso actual será apagado.')) {
       localStorage.removeItem('portfolio-draft')
       setValues({})
       setCurrentStep(0)
@@ -143,7 +143,7 @@ export default function Portfolio() {
         <span className="text-2xl flex-shrink-0" aria-hidden="true">💡</span>
         <p className={`text-sm ${highContrast ? 'text-white' : 'text-amber-800'}`}>
           O portefólio é <strong>guardado no seu browser</strong>. Se fechar esta página, o progresso não se perde.
-          No final, pode descarregar um ficheiro Word pronto a entregar.
+          No fim, pode descarregar um ficheiro Word pronto a entregar.
         </p>
       </div>
 

@@ -20,14 +20,14 @@ const mainFeatures = [
     to: '/verificador',
     icon: '🔍',
     title: 'Verificar Texto',
-    description: 'Cole o seu texto e receba sugestões de melhoria — sem alterar nada automaticamente.',
+    description: 'Cole o seu texto e recebe sugestões de melhoria — sem alterar nada automaticamente.',
     accent: false,
   },
   {
     to: '/regras',
     icon: '✅',
     title: 'Regras do RVCC',
-    description: 'Checklist completo para garantir que o seu portefólio tem tudo o que é necessário.',
+    description: 'Checklist completa para verificar se o seu portefólio tem tudo o que é necessário.',
     accent: false,
   },
   {
@@ -54,7 +54,7 @@ export default function Home() {
     <main id="main-content" className="max-w-7xl mx-auto px-4 py-10">
       {/* Hero */}
       <section
-        className={`rounded-3xl p-8 sm:p-12 mb-12 text-center relative overflow-hidden ${
+        className={`rounded-3xl p-8 sm:p-12 mb-10 text-center relative overflow-hidden ${
           highContrast
             ? 'bg-black border-2 border-white text-white'
             : 'bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white'
@@ -162,21 +162,13 @@ export default function Home() {
 
       {/* Info strip */}
       <section
-        className={`mt-12 rounded-2xl p-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center border-2 ${
-          highContrast ? 'bg-black border-white text-white' : 'bg-blue-50 border-blue-200'
-        }`}
+        className={`mt-10 flex items-center gap-2 justify-center ${highContrast ? 'text-white' : 'text-slate-400'}`}
         aria-label="Informação sobre a plataforma"
       >
-        <span className="text-4xl flex-shrink-0" aria-hidden="true">🔒</span>
-        <div>
-          <p className={`font-bold text-lg ${highContrast ? 'text-yellow-400' : 'text-blue-800'}`}>
-            Privacidade garantida
-          </p>
-          <p className={`text-base ${highContrast ? 'text-white' : 'text-blue-700'}`}>
-            Esta plataforma não tem registo, não guarda os seus dados em servidores e não usa inteligência artificial para gerar texto.
-            Tudo funciona no seu browser — os seus dados ficam consigo.
-          </p>
-        </div>
+        <span className="text-sm" aria-hidden="true">🔒</span>
+        <p className="text-sm">
+          Sem registo · sem dados guardados · sem inteligência artificial · funciona totalmente no seu browser
+        </p>
       </section>
     </main>
   )

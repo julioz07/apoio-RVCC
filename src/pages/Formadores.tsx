@@ -164,7 +164,7 @@ export default function Formadores() {
               'Sem registo nem dados pessoais guardados em servidores',
               'Sem inteligência artificial — não gera texto automaticamente',
               'Compatible com GitHub Pages — funciona sem backend',
-              'Acessível: modo alto contraste, tamanho de letra ajustável, navegação por teclado',
+              'Acessível: modo alto contraste, tamanho de letra ajustável, navegação por teclado (WCAG 2.1 AA)',
               'Exportação do portefólio em ficheiro .docx',
               'Verificador de texto com sugestões (sem correção automática)',
               'Tutoriais passo a passo com vídeos incorporados',
