@@ -249,7 +249,7 @@ export default function Portfolio() {
       }`} role="note">
         <span className="text-2xl flex-shrink-0" aria-hidden="true">💡</span>
         <p className={`text-sm ${highContrast ? 'text-white' : 'text-amber-800'}`}>
-          O documento gerado já contém a estrutura completa e orientações detalhadas em cada secção.
+          O documento gerado já contém a estrutura base e orientações detalhadas em cada secção.
           Basta escrever por cima das instruções no Word e apagá-las quando terminar.
           Objetivo: <strong>entre 50 a 70 páginas</strong>.
         </p>

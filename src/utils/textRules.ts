@@ -3,6 +3,15 @@ export interface TextIssue {
   label: string
   description: string
   suggestion: string
+  /** Short text snippets showing where the issue appears */
+  excerpts?: string[]
+}
+
+/** Returns the first `maxWords` words of `s`, ending with "…" if truncated */
+function snippet(s: string, maxWords = 10): string {
+  const words = s.trim().split(/\s+/)
+  if (words.length <= maxWords) return s.trim()
+  return words.slice(0, maxWords).join(' ') + '…'
 }
 
 const REQUIRED_SECTIONS = [
@@ -53,6 +62,7 @@ export function analyzeText(text: string): TextIssue[] {
       label: `${longSentences.length} frase(s) demasiado longa(s)`,
       description: 'Algumas frases têm mais de 25 palavras, o que dificulta a leitura.',
       suggestion: 'Divida as frases longas em frases mais curtas usando ponto final.',
+      excerpts: longSentences.slice(0, 3).map(s => snippet(s)),
     })
   }
 
@@ -76,6 +86,7 @@ export function analyzeText(text: string): TextIssue[] {
       label: `${missingPunct.length} parágrafo(s) sem pontuação final`,
       description: 'Alguns parágrafos não terminam com ponto final, ponto de exclamação ou ponto de interrogação.',
       suggestion: 'Reveja os parágrafos e adicione pontuação no final de cada um.',
+      excerpts: missingPunct.slice(0, 3).map(p => snippet(p)),
     })
   }
 
@@ -87,16 +98,20 @@ export function analyzeText(text: string): TextIssue[] {
       label: `${longParagraphs.length} parágrafo(s) muito longo(s)`,
       description: 'Existe(m) parágrafo(s) com mais de 80 palavras.',
       suggestion: 'Divida parágrafos muito longos em parágrafos menores para facilitar a leitura.',
+      excerpts: longParagraphs.slice(0, 3).map(p => snippet(p)),
     })
   }
 
   // 7. Double spaces
   if (/  +/.test(text)) {
+    const dsMatch = text.match(/(\S[^\n]{0,20})  +([^\n]{0,20}\S)/)
+    const dsExcerpt = dsMatch ? `…${dsMatch[1].trim()}  ${dsMatch[2].trim()}…` : undefined
     issues.push({
       type: 'info',
       label: 'Espaços duplicados encontrados',
       description: 'Foram encontrados dois ou mais espaços seguidos no texto.',
       suggestion: 'Remova os espaços a mais — use apenas um espaço entre palavras.',
+      excerpts: dsExcerpt ? [dsExcerpt] : undefined,
     })
   }
 
