@@ -20,9 +20,20 @@ export default function Regras() {
           <span aria-hidden="true">✅ </span>Regras do RVCC
         </h1>
         <p className={`text-xl ${highContrast ? 'text-white' : 'text-slate-500'}`}>
-          Use esta checklist para garantir que o seu portefólio está completo e bem estruturado.
+          Checklist para garantir que o seu portefólio está completo e bem estruturado.
         </p>
       </header>
+
+      {/* Aviso de variação regional */}
+      <div className={`rounded-xl border-2 p-4 mb-8 flex gap-3 items-start ${
+        highContrast ? 'bg-black border-white text-white' : 'bg-amber-50 border-amber-300'
+      }`} role="note">
+        <span className="text-2xl flex-shrink-0" aria-hidden="true">⚠️</span>
+        <p className={`text-sm ${highContrast ? 'text-white' : 'text-amber-800'}`}>
+          Estas são as regras de <strong>base comuns</strong> ao processo RVCC. Cada centro pode ter
+          requisitos adicionais ou ligeiramente diferentes — confirme sempre com a sua formadora ou formador.
+        </p>
+      </div>
 
       {/* Progress */}
       <div
