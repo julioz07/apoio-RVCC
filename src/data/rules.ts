@@ -105,25 +105,25 @@ export const requiredSections = [
   'webgrafia',
 ]
 
-export const formadorLinks = [
-  {
-    label: 'DGEP — Direção-Geral de Educação',
-    url: 'https://www.dge.mec.pt/rvcc',
-    description: 'Portal oficial com informação sobre o processo RVCC.',
-  },
-  {
-    label: 'ANQEP — Agência Nacional',
-    url: 'https://www.anqep.gov.pt',
-    description: 'Informação sobre qualificações e formação.',
-  },
-  {
-    label: 'IEFP — Emprego e Formação',
-    url: 'https://www.iefp.pt',
-    description: 'Centro de emprego e formação profissional.',
-  },
-  {
-    label: 'Portal das Escolas',
-    url: 'https://www.portaldasescolas.pt',
-    description: 'Recursos educativos digitais.',
-  },
+export const formadorLinks: { label: string; url: string; description: string; category: string }[] = [
+  // Ferramentas de documentos
+  { category: 'Ferramentas de Documentos', label: 'iLovePDF', url: 'https://www.ilovepdf.com/pt', description: 'Converter, juntar, dividir, comprimir e editar PDFs gratuitamente — sem instalação.' },
+  { category: 'Ferramentas de Documentos', label: 'Word Online (Microsoft)', url: 'https://www.office.com', description: 'Word, Excel e PowerPoint gratuitos no browser. Alunos só precisam de conta Microsoft (Outlook).' },
+  { category: 'Ferramentas de Documentos', label: 'Google Docs', url: 'https://docs.google.com', description: 'Editor de texto gratuito da Google, guarda automaticamente. Basta ter conta Gmail.' },
+  { category: 'Ferramentas de Documentos', label: 'Smallpdf', url: 'https://smallpdf.com/pt', description: 'Alternativa ao iLovePDF — converter Word para PDF, PDF para Word, comprimir e assinar.' },
+
+  // Verificação e escrita
+  { category: 'Verificação e Escrita', label: 'LanguageTool', url: 'https://languagetool.org/pt', description: 'Corretor gramatical e ortográfico para português — funciona no browser, gratuito.' },
+  { category: 'Verificação e Escrita', label: 'Dicionário Porto Editora Online', url: 'https://www.infopedia.pt/dicionarios/lingua-portuguesa', description: 'Dicionário de referência em português europeu — para verificar ortografia e significados.' },
+  { category: 'Verificação e Escrita', label: 'Conjugador Porto Editora', url: 'https://www.infopedia.pt/conjugacao-verbal', description: 'Conjugação de verbos em todos os tempos — útil para alunos com dúvidas na escrita.' },
+
+  // Comunicação e partilha
+  { category: 'Comunicação e Partilha', label: 'WeTransfer', url: 'https://wetransfer.com', description: 'Enviar ficheiros grandes por email (até 2 GB grátis) — sem registo necessário.' },
+  { category: 'Comunicação e Partilha', label: 'QR Code Monkey', url: 'https://www.qrcode-monkey.com/pt', description: 'Criar QR codes gratuitos para partilhar links com alunos — imprimir e distribuir.' },
+  { category: 'Comunicação e Partilha', label: 'Microsoft Teams (web)', url: 'https://teams.microsoft.com', description: 'Videochamadas, chat e partilha de ficheiros com alunos — gratuito com conta Microsoft.' },
+
+  // Referências RVCC
+  { category: 'Referências Oficiais', label: 'ANQEP — Qualificações e RVCC', url: 'https://www.anqep.gov.pt', description: 'Agência Nacional para a Qualificação — informação oficial sobre o processo RVCC.' },
+  { category: 'Referências Oficiais', label: 'Catálogo Nacional de Qualificações', url: 'https://www.catalogo.anqep.gov.pt', description: 'Consultar perfis de competências e referenciais de nível 2 e 3.' },
+  { category: 'Referências Oficiais', label: 'IEFP — Emprego e Formação', url: 'https://www.iefp.pt', description: 'Centro de emprego e formação — encaminhamento de candidatos ao RVCC.' },
 ]
