@@ -13,7 +13,7 @@ export const videos: VideoEntry[] = [
   {
     id: 'ambiente-trabalho-windows',
     youtubeId: 'PqGW7Gs2j40',
-    title: 'Ambiente de Trabalho do Windows',
+    title: 'Ambiente de Trabalho do Windows 11',
     description:
       'Tutorial dedicado ao Ambiente de Trabalho do Windows — ícones, barra de tarefas, botão Iniciar, e como navegar entre janelas e programas.',
     category: 'basico',
@@ -43,7 +43,7 @@ export const videos: VideoEntry[] = [
   {
     id: 'basico-geral',
     youtubeId: 'XZhv5eOBzg4',
-    title: 'Informática básica completa',
+    title: 'Informática básica completa (Windows 10)',
     description:
       'Curso completo de informática para iniciantes. Cobre o ambiente de trabalho do Windows, teclado, internet, pesquisa no Google, email e muito mais — tudo num só vídeo.',
     category: 'basico',
