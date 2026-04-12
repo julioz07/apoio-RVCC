@@ -6,8 +6,14 @@ export interface FormStep {
   label: string
   icon: string
   description: string
-  placeholder: string
-  minWords: number
+  /** 'input' shows a text field; 'info' shows a guidance card (no textarea) */
+  type?: 'input' | 'info'
+  /** Only for type='input' */
+  placeholder?: string
+  /** Only for type='input' */
+  minWords?: number
+  /** Lines shown on type='info' steps */
+  guidance?: string[]
 }
 
 interface StepFormProps {
@@ -39,9 +45,11 @@ export default function StepForm({
   const [touched, setTouched] = useState(false)
 
   const step = steps[currentStep]
-  const value = values[step.id] ?? ''
+  const isInfo = step.type === 'info'
+  const value = isInfo ? '' : (values[step.id] ?? '')
   const words = countWords(value)
-  const isValid = words >= step.minWords
+  const minW = step.minWords ?? 1
+  const isValid = isInfo || words >= minW
   const isLast = currentStep === steps.length - 1
   const progress = Math.round(((currentStep + 1) / steps.length) * 100)
 
@@ -95,7 +103,7 @@ export default function StepForm({
         ))}
       </ol>
 
-      {/* Current step */}
+      {/* Current step card */}
       <div className={`rounded-2xl border-2 p-6 ${
         highContrast ? 'bg-black border-white' : 'bg-white border-slate-200'
       }`}>
@@ -111,43 +119,67 @@ export default function StepForm({
           </div>
         </div>
 
-        <label htmlFor={`step-input-${step.id}`} className="sr-only">
-          {step.label}
-        </label>
-        <textarea
-          id={`step-input-${step.id}`}
-          value={value}
-          onChange={e => onChange(step.id, e.target.value)}
-          placeholder={step.placeholder}
-          rows={10}
-          aria-required="true"
-          aria-invalid={touched && !isValid}
-          aria-describedby={`step-hint-${step.id}`}
-          className={`w-full rounded-xl border-2 p-4 text-base leading-relaxed resize-y transition-colors focus:outline-none focus-visible:ring-2 ${
-            highContrast
-              ? 'bg-black text-white border-white placeholder-slate-400 focus-visible:ring-yellow-400'
-              : touched && !isValid
-              ? 'border-red-400 bg-red-50 focus-visible:ring-red-400'
-              : 'border-slate-300 bg-slate-50 focus:border-blue-400 focus-visible:ring-blue-400'
-          }`}
-        />
-
-        <div id={`step-hint-${step.id}`} className="flex items-center justify-between mt-2 text-sm">
-          <span className={
-            touched && !isValid
-              ? 'text-red-600 font-medium'
-              : highContrast ? 'text-white' : 'text-slate-500'
-          }>
-            {touched && !isValid
-              ? `Escreva pelo menos ${step.minWords} palavras (tem ${words})`
-              : `${words} palavra${words !== 1 ? 's' : ''} — mínimo: ${step.minWords}`}
-          </span>
-          {words >= step.minWords && (
-            <span className={`font-semibold ${highContrast ? 'text-yellow-400' : 'text-green-600'}`}>
-              ✓ Suficiente
-            </span>
-          )}
-        </div>
+        {isInfo ? (
+          /* Guidance card — no textarea */
+          <div className={`rounded-xl p-5 space-y-2 ${
+            highContrast ? 'bg-white/10 border border-white' : 'bg-slate-50 border border-slate-200'
+          }`} role="note" aria-label={`Orientações para ${step.label}`}>
+            {step.guidance?.map((line, i) =>
+              line === '' ? (
+                <div key={i} className="h-2" />
+              ) : line.startsWith('▌') ? (
+                <p key={i} className={`font-bold text-base mt-3 ${highContrast ? 'text-yellow-400' : 'text-blue-700'}`}>
+                  {line}
+                </p>
+              ) : line.startsWith('OBJECTIVO') ? (
+                <p key={i} className={`font-semibold text-sm px-3 py-1.5 rounded-lg ${
+                  highContrast ? 'bg-yellow-400/20 text-yellow-300' : 'bg-blue-50 text-blue-800 border border-blue-200'
+                }`}>
+                  🎯 {line}
+                </p>
+              ) : (
+                <p key={i} className={`text-sm leading-relaxed ${highContrast ? 'text-white' : 'text-slate-700'}`}>
+                  {line}
+                </p>
+              )
+            )}
+          </div>
+        ) : (
+          /* Input field */
+          <>
+            <label htmlFor={`step-input-${step.id}`} className="sr-only">
+              {step.label}
+            </label>
+            <input
+              id={`step-input-${step.id}`}
+              type="text"
+              value={value}
+              onChange={e => onChange(step.id, e.target.value)}
+              placeholder={step.placeholder ?? ''}
+              aria-required="true"
+              aria-invalid={touched && !isValid}
+              aria-describedby={`step-hint-${step.id}`}
+              className={`w-full rounded-xl border-2 p-4 text-base leading-relaxed transition-colors focus:outline-none focus-visible:ring-2 ${
+                highContrast
+                  ? 'bg-black text-white border-white placeholder-slate-400 focus-visible:ring-yellow-400'
+                  : touched && !isValid
+                  ? 'border-red-400 bg-red-50 focus-visible:ring-red-400'
+                  : 'border-slate-300 bg-slate-50 focus:border-blue-400 focus-visible:ring-blue-400'
+              }`}
+            />
+            <div id={`step-hint-${step.id}`} className="flex items-center justify-between mt-2 text-sm">
+              <span className={
+                touched && !isValid
+                  ? 'text-red-600 font-medium'
+                  : highContrast ? 'text-white' : 'text-slate-500'
+              }>
+                {touched && !isValid
+                  ? `Preencha este campo`
+                  : value.trim() ? '✓' : 'Campo obrigatório'}
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Navigation */}
