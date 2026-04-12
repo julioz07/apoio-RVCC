@@ -7,9 +7,10 @@ interface TutorialBlockProps {
   steps: string[]
   tips: string[]
   videoUrl?: string
+  onBack?: () => void
 }
 
-export default function TutorialBlock({ icon, title, description, steps, tips, videoUrl }: TutorialBlockProps) {
+export default function TutorialBlock({ icon, title, description, steps, tips, videoUrl, onBack }: TutorialBlockProps) {
   const { highContrast } = useAccessibility()
 
   return (
@@ -110,6 +111,24 @@ export default function TutorialBlock({ icon, title, description, steps, tips, v
               />
             </div>
           </section>
+        )}
+
+        {/* Bottom back button */}
+        {onBack && (
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={onBack}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                highContrast
+                  ? 'bg-white text-black hover:bg-yellow-400 focus-visible:outline-white'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 focus-visible:outline-blue-600'
+              }`}
+              aria-label="Voltar à lista de tutoriais"
+            >
+              <span aria-hidden="true">←</span> Voltar à lista de tutoriais
+            </button>
+          </div>
         )}
       </div>
     </article>

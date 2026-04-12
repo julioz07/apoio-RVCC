@@ -65,7 +65,7 @@ export default function Aprender() {
           >
             ← Voltar à lista
           </button>
-          <TutorialBlock {...selectedTutorial} />
+          <TutorialBlock {...selectedTutorial} onBack={() => setOpenTutorial(null)} />
         </div>
       ) : (
         <section aria-labelledby="tutorial-list-heading" className="animate-fade-in">
