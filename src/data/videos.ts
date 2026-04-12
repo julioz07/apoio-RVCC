@@ -11,6 +11,36 @@ export interface VideoEntry {
 
 export const videos: VideoEntry[] = [
   {
+    id: 'ambiente-trabalho-windows',
+    youtubeId: 'PqGW7Gs2j40',
+    title: 'Ambiente de Trabalho do Windows',
+    description:
+      'Tutorial dedicado ao Ambiente de Trabalho do Windows — ícones, barra de tarefas, botão Iniciar, e como navegar entre janelas e programas.',
+    category: 'basico',
+    categoryLabel: 'Básico',
+    tutorialIds: ['ambiente-trabalho'],
+  },
+  {
+    id: 'teclado-atalhos',
+    youtubeId: 'QhyctQ-poG0',
+    title: 'Como usar o teclado — atalhos e funções',
+    description:
+      'Aprenda a usar o teclado com confiança: acentos, maiúsculas, e os atalhos mais úteis (CTRL+C, CTRL+V, CTRL+Z e muito mais). Existe também uma lista de reprodução completa com mais atalhos: youtube.com/playlist?list=PLQaxGBmNjqNyDjk8xW7hErLsT1HtXVmNR',
+    category: 'basico',
+    categoryLabel: 'Básico',
+    tutorialIds: ['teclado', 'atalhos-teclado'],
+  },
+  {
+    id: 'internet-basico',
+    youtubeId: 'pJ98yuH7rtw',
+    title: 'Navegar na internet, pesquisar no Google e fazer zoom',
+    description:
+      'Tutorial para iniciantes sobre como usar o browser, pesquisar no Google, abrir páginas e fazer zoom — ideal para quem está a aprender a usar a internet pela primeira vez.',
+    category: 'basico',
+    categoryLabel: 'Básico',
+    tutorialIds: ['browser-internet', 'pesquisar-internet'],
+  },
+  {
     id: 'basico-geral',
     youtubeId: 'XZhv5eOBzg4',
     title: 'Informática básica completa',
@@ -20,13 +50,8 @@ export const videos: VideoEntry[] = [
     categoryLabel: 'Básico',
     tutorialIds: [
       'ligar-computador',
-      'ambiente-trabalho',
-      'teclado',
-      'atalhos-teclado',
       'copiar-colar',
       'pasta',
-      'browser-internet',
-      'pesquisar-internet',
       'email-basico',
       'janelas-windows',
     ],
