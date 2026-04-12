@@ -1,6 +1,8 @@
 import { useAccessibility } from '../context/AccessibilityContext'
+import { getVideoForTutorial } from '../data/videos'
 
 interface TutorialBlockProps {
+  id: string
   icon: string
   title: string
   description: string
@@ -8,9 +10,11 @@ interface TutorialBlockProps {
   tips: string[]
   videoUrl?: string
   onBack?: () => void
+  onViewVideo?: () => void
 }
 
-export default function TutorialBlock({ icon, title, description, steps, tips, videoUrl, onBack }: TutorialBlockProps) {
+export default function TutorialBlock({ id, icon, title, description, steps, tips, onBack, onViewVideo }: TutorialBlockProps) {
+  const relatedVideo = getVideoForTutorial(id)
   const { highContrast } = useAccessibility()
 
   return (
@@ -91,26 +95,37 @@ export default function TutorialBlock({ icon, title, description, steps, tips, v
           </section>
         )}
 
-        {/* Video embed */}
-        {videoUrl && (
-          <section aria-labelledby={`video-${title.replace(/\s/g, '-')}`}>
-            <h3
-              id={`video-${title.replace(/\s/g, '-')}`}
-              className={`text-lg font-bold mb-3 ${highContrast ? 'text-white' : 'text-slate-700'}`}
-            >
-              <span aria-hidden="true">🎥 </span>Vídeo de apoio
-            </h3>
-            <div className="relative aspect-video rounded-xl overflow-hidden border-2 border-slate-200">
-              <iframe
-                src={videoUrl}
-                title={`Vídeo de apoio: ${title}`}
-                className="absolute inset-0 w-full h-full"
-                allowFullScreen
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              />
+{/* Video link */}
+        {relatedVideo && onViewVideo && (
+          <div
+            className={`rounded-xl p-4 flex items-center justify-between gap-4 border-2 ${
+              highContrast ? 'border-yellow-400 bg-black' : 'border-indigo-200 bg-indigo-50'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl" aria-hidden="true">🎥</span>
+              <div>
+                <p className={`font-semibold text-sm ${highContrast ? 'text-white' : 'text-indigo-900'}`}>
+                  {relatedVideo.title}
+                </p>
+                <p className={`text-xs ${highContrast ? 'text-white/70' : 'text-indigo-600'}`}>
+                  Vídeo relacionado com este tema
+                </p>
+              </div>
             </div>
-          </section>
+            <button
+              type="button"
+              onClick={onViewVideo}
+              className={`flex-shrink-0 px-4 py-2 rounded-lg font-semibold text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                highContrast
+                  ? 'bg-yellow-400 text-black hover:bg-white focus-visible:outline-white'
+                  : 'bg-indigo-700 text-white hover:bg-indigo-800 focus-visible:outline-indigo-900'
+              }`}
+              aria-label={`Ver vídeo relacionado: ${relatedVideo.title}`}
+            >
+              Ver vídeo →
+            </button>
+          </div>
         )}
 
         {/* Bottom back button */}

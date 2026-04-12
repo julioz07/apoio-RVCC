@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAccessibility } from '../context/AccessibilityContext'
 import TutorialBlock from '../components/TutorialBlock'
+import VideoGallery from '../components/VideoGallery'
 import { tutorials, tutorialCategories } from '../data/tutorials'
 
 export default function Aprender() {
@@ -10,6 +11,11 @@ export default function Aprender() {
 
   const filtered = tutorials.filter(t => t.category === activeCategory)
   const selectedTutorial = tutorials.find(t => t.id === openTutorial)
+
+  function goToVideos() {
+    setActiveCategory('videos')
+    setOpenTutorial(null)
+  }
 
   return (
     <main id="main-content" className="max-w-7xl mx-auto px-4 py-10">
@@ -47,11 +53,33 @@ export default function Aprender() {
               </button>
             </li>
           ))}
+          {/* Vídeos tab */}
+          <li>
+            <button
+              type="button"
+              onClick={() => { setActiveCategory('videos'); setOpenTutorial(null) }}
+              aria-pressed={activeCategory === 'videos'}
+              className={`flex items-center gap-2 px-5 py-3 rounded-xl font-semibold border-2 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                activeCategory === 'videos'
+                  ? highContrast
+                    ? 'bg-yellow-400 text-black border-yellow-400 focus-visible:outline-white'
+                    : 'bg-indigo-700 text-white border-indigo-700 shadow-md focus-visible:outline-indigo-900'
+                  : highContrast
+                  ? 'bg-black text-white border-white hover:bg-white hover:text-black focus-visible:outline-yellow-400'
+                  : 'bg-white text-slate-700 border-slate-300 hover:border-indigo-400 hover:text-indigo-700 focus-visible:outline-indigo-600'
+              }`}
+            >
+              <span aria-hidden="true">🎥</span>
+              <span>Vídeos</span>
+            </button>
+          </li>
         </ul>
       </nav>
 
-      {/* Tutorial list or detail */}
-      {selectedTutorial ? (
+      {/* Tutorial list, detail, or video gallery */}
+      {activeCategory === 'videos' ? (
+        <VideoGallery />
+      ) : selectedTutorial ? (
         <div className="animate-fade-in">
           <button
             type="button"
@@ -65,7 +93,7 @@ export default function Aprender() {
           >
             ← Voltar à lista
           </button>
-          <TutorialBlock {...selectedTutorial} onBack={() => setOpenTutorial(null)} />
+          <TutorialBlock {...selectedTutorial} onBack={() => setOpenTutorial(null)} onViewVideo={goToVideos} />
         </div>
       ) : (
         <section aria-labelledby="tutorial-list-heading" className="animate-fade-in">
@@ -92,13 +120,6 @@ export default function Aprender() {
                   <p className={`text-sm leading-relaxed ${highContrast ? '' : 'text-slate-500'}`}>
                     {tutorial.description.slice(0, 100)}…
                   </p>
-                  {tutorial.videoUrl && (
-                    <span className={`text-xs font-semibold px-2 py-1 rounded-full w-fit ${
-                      highContrast ? 'border border-white' : 'bg-blue-50 text-blue-600'
-                    }`} aria-label="Inclui vídeo de apoio">
-                      🎥 Inclui vídeo
-                    </span>
-                  )}
                   <span className={`mt-auto text-sm font-semibold flex items-center gap-1 ${
                     highContrast ? '' : 'text-blue-600'
                   }`} aria-hidden="true">
