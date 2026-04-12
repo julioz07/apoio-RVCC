@@ -96,13 +96,18 @@ export default function TextAnalyzer({ issues, stats }: TextAnalyzerProps) {
                   <p className="text-white text-sm">{issue.description}</p>
                   <p className="text-yellow-400 text-sm mt-1 font-medium">→ {issue.suggestion}</p>
                   {issue.excerpts && issue.excerpts.length > 0 && (
-                    <ul className="mt-2 flex flex-col gap-1">
-                      {issue.excerpts.map((ex, j) => (
-                        <li key={j} className="text-xs font-mono italic text-white/80 border border-white/30 rounded px-2 py-1">
-                          &ldquo;{ex}&rdquo;
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="mt-2">
+                      <p className="text-xs font-semibold mb-1 text-white/60">
+                        📍 Exemplos de onde este problema aparece no texto:
+                      </p>
+                      <ul className="flex flex-col gap-1">
+                        {issue.excerpts.map((ex, j) => (
+                          <li key={j} className="text-xs font-mono italic text-white/80 border border-white/30 rounded px-2 py-1">
+                            &ldquo;{ex}&rdquo;
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </li>
               )
@@ -128,16 +133,21 @@ export default function TextAnalyzer({ issues, stats }: TextAnalyzerProps) {
                       💡 {issue.suggestion}
                     </p>
                     {issue.excerpts && issue.excerpts.length > 0 && (
-                      <ul className="mt-2 flex flex-col gap-1" aria-label="Trechos com este problema">
-                        {issue.excerpts.map((ex, j) => (
-                          <li
-                            key={j}
-                            className={`text-xs rounded-lg px-3 py-1.5 font-mono italic border ${cfg.border} bg-white/60 ${cfg.text}`}
-                          >
-                            &ldquo;{ex}&rdquo;
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="mt-2">
+                        <p className={`text-xs font-semibold mb-1 ${cfg.text} opacity-70`}>
+                          📍 Exemplos de onde este problema aparece no texto:
+                        </p>
+                        <ul className="flex flex-col gap-1" aria-label="Trechos com este problema">
+                          {issue.excerpts.map((ex, j) => (
+                            <li
+                              key={j}
+                              className={`text-xs rounded-lg px-3 py-1.5 font-mono italic border ${cfg.border} bg-white/60 ${cfg.text}`}
+                            >
+                              &ldquo;{ex}&rdquo;
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     )}
                   </div>
                 </div>
