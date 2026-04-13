@@ -79,6 +79,133 @@ src/
 
 ---
 
+## 🤝 Como Contribuir
+
+Contribuições são bem-vindas! Seja a corrigir um erro, melhorar um tutorial, adicionar novas regras ou sugerir funcionalidades — qualquer ajuda é apreciada.
+
+### Tipos de contribuição
+
+| Tipo | Exemplos |
+|---|---|
+| 📝 **Conteúdo** | Novos tutoriais, mais passos, melhores dicas, corrigir erros de texto |
+| 📋 **Regras RVCC** | Adicionar/corrigir itens da checklist em `src/data/rules.ts` |
+| 🎥 **Vídeos** | Preencher os campos `videoUrl` em `src/data/tutorials.ts` com IDs do YouTube |
+| 🐛 **Bugs** | Comportamento inesperado, problemas de acessibilidade, erros visuais |
+| 💡 **Sugestões** | Novas funcionalidades ou melhorias — abrir uma Issue primeiro |
+
+---
+
+### Passo a passo para fazer um Pull Request
+
+1. **Fork do repositório**
+   - Clicar em **Fork** no canto superior direito da página do repositório no GitHub.
+
+2. **Clonar o fork localmente**
+   ```bash
+   git clone https://github.com/SEU-UTILIZADOR/apoio-RVCC.git
+   cd apoio-RVCC
+   ```
+
+3. **Instalar dependências e arrancar o servidor**
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+4. **Criar um branch para a alteração**
+   ```bash
+   git checkout -b minha-contribuicao
+   # Exemplos: adicionar-tutorial-email, corrigir-regra-introducao, fix-navbar-mobile
+   ```
+
+5. **Fazer as alterações** (ver secção abaixo sobre onde editar)
+
+6. **Verificar que tudo funciona**
+   ```bash
+   npm run build   # garante que não há erros de TypeScript/build
+   ```
+
+7. **Commit e push**
+   ```bash
+   git add .
+   git commit -m "feat: adicionar tutorial sobre e-mail"
+   git push origin minha-contribuicao
+   ```
+
+8. **Abrir o Pull Request**
+   - Ir ao repositório original no GitHub.
+   - Clicar em **Compare & pull request**.
+   - Descrever o que foi alterado e porquê.
+   - Submeter!
+
+---
+
+### Onde editar o quê
+
+#### Tutoriais (`src/data/tutorials.ts`)
+
+Cada tutorial segue esta estrutura:
+
+```ts
+{
+  id: 'id-unico-sem-espacos',         // identificador único, ex: 'usar-email'
+  title: 'Título do tutorial',
+  category: 'basico',                  // 'basico' | 'word' | 'word-online' | 'ficheiros' | 'teams'
+  categoryLabel: 'Básico',
+  icon: '📧',                          // emoji representativo
+  description: 'Breve descrição...',
+  steps: [
+    'Passo 1...',
+    'Passo 2...',
+  ],
+  tips: [
+    'Dica útil...',
+  ],
+  videoUrl: 'https://www.youtube.com/embed/VIDEO_ID',  // opcional
+}
+```
+
+#### Regras do Portefólio (`src/data/rules.ts`)
+
+```ts
+{
+  id: 'id-unico',
+  title: 'Nome da secção',
+  description: 'O que deve conter...',
+  required: true,   // true = obrigatório | false = recomendado
+  tip: 'Conselho prático...',  // opcional
+}
+```
+
+#### Vídeos de apoio (`src/data/videos.ts`)
+
+Ficheiro com vídeos para a Área de Formadores e outras secções. Consultar a estrutura existente no ficheiro antes de adicionar.
+
+---
+
+### Convenções de commit
+
+Usar prefixos simples para facilitar o histórico:
+
+| Prefixo | Uso |
+|---|---|
+| `feat:` | Nova funcionalidade ou conteúdo |
+| `fix:` | Correção de bug ou erro |
+| `content:` | Alteração apenas de texto/conteúdo |
+| `style:` | Ajustes visuais/CSS sem lógica |
+| `a11y:` | Melhorias de acessibilidade |
+
+---
+
+### Reportar problemas
+
+Abrir uma [Issue no GitHub](https://github.com/julioz07/apoio-RVCC/issues) com:
+- Descrição clara do problema ou sugestão
+- Passos para reproduzir (se for um bug)
+- Screenshot se ajudar
+
+---
+
 ## 👤 Autor
 
 Criado por **Júlio Rodrigues** — [github.com/julioz07](https://github.com/julioz07)
